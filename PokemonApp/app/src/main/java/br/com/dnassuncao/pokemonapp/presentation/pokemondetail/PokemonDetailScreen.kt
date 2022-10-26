@@ -7,7 +7,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,7 +31,6 @@ import br.com.dnassuncao.pokemonapp.ui.comonents.ErrorAlert
 import br.com.dnassuncao.pokemonapp.ui.comonents.PokeLoading
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import java.util.*
 import kotlin.math.round
 
 @Composable
