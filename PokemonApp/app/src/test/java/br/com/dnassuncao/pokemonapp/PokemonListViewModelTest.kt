@@ -1,11 +1,11 @@
 package br.com.dnassuncao.pokemonapp
 
-import br.com.dnassuncao.pokemonapp.data.entity.PokemonResponse
+import br.com.dnassuncao.pokemonapp.data.entity.PokemonResult
 import br.com.dnassuncao.pokemonapp.data.mapper.toDomain
-import br.com.dnassuncao.pokemonapp.domain.usecase.FetchPokemonUseCase
-import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeUiState
-import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeUserEvent
-import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeViewModel
+import br.com.dnassuncao.pokemonapp.domain.usecase.FetchListPokemonUseCase
+import br.com.dnassuncao.pokemonapp.presentation.pokemonlist.viewmodel.PokemonListUiState
+import br.com.dnassuncao.pokemonapp.presentation.pokemonlist.viewmodel.PokemonListUserEvent
+import br.com.dnassuncao.pokemonapp.presentation.pokemonlist.viewmodel.PokemonListViewModel
 import br.com.dnassuncao.pokemonapp.ui.common.UiStatus
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
@@ -21,20 +21,20 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class HomeViewModelTest {
+class PokemonListViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: PokemonListViewModel
 
     @MockK
-    private lateinit var useCase: FetchPokemonUseCase
+    private lateinit var useCase: FetchListPokemonUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        viewModel = HomeViewModel(fetchPokemonUseCase = useCase)
+        viewModel = PokemonListViewModel(fetchListPokemonUseCase = useCase)
     }
 
     @After
@@ -47,20 +47,17 @@ class HomeViewModelTest {
 
         // Given
         val items = listOf(
-            PokemonResponse(
-                id = 1,
+            PokemonResult(
                 name = "Bulbasaur",
-                image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png"
             ).toDomain(),
-            PokemonResponse(
-                id = 2,
+            PokemonResult(
                 name = "Charmeleon",
-                image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png"
             ).toDomain(),
-            PokemonResponse(
-                id = 3,
+            PokemonResult(
                 name = "Pidgey",
-                image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/16.png"
+                url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/16.png"
             ).toDomain(),
         )
 
@@ -71,19 +68,19 @@ class HomeViewModelTest {
         }
 
         val expectedLoading =
-            HomeUiState(
+            PokemonListUiState(
                 status = UiStatus.Success,
                 pokemonList = items
             )
 
         val expectedSuccess =
-            HomeUiState(
+            PokemonListUiState(
                 status = UiStatus.Success,
                 pokemonList = items
             )
 
         // When
-        viewModel.onUserEvent(HomeUserEvent.OnInitScreen)
+        viewModel.onUserEvent(PokemonListUserEvent.OnInitScreen)
 
         // Then
         advanceUntilIdle()

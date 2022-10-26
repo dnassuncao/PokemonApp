@@ -1,4 +1,4 @@
-package br.com.dnassuncao.pokemonapp.presentation.home
+package br.com.dnassuncao.pokemonapp.presentation.pokemonlist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -8,19 +8,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.NavHostController
 import br.com.dnassuncao.pokemonapp.presentation.Screen
-import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeNavigationRequest
-import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeUserEvent
-import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeViewModel
+import br.com.dnassuncao.pokemonapp.presentation.pokemonlist.viewmodel.PokemonListNavigationRequest
+import br.com.dnassuncao.pokemonapp.presentation.pokemonlist.viewmodel.PokemonListUserEvent
+import br.com.dnassuncao.pokemonapp.presentation.pokemonlist.viewmodel.PokemonListViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.compose.getViewModel
 
-class HomeRoute {
-}
-
 @Composable
-fun HomeRoute(
-    viewModel: HomeViewModel = getViewModel(),
+fun PokemonListRoute(
+    viewModel: PokemonListViewModel = getViewModel(),
     navController: NavHostController
 ) {
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -33,20 +30,24 @@ fun HomeRoute(
                 handleNavigationRequestChange(request, navController)
             }.launchIn(this)
 
-        viewModel.onUserEvent(event = HomeUserEvent.OnInitScreen)
+        viewModel.onUserEvent(event = PokemonListUserEvent.OnInitScreen)
     }
 
-    HomeScreen(
+    PokemonListScreen(
         uiState = uiState.value,
-        onUiEvent = {}
+        onUiEvent = {
+            viewModel.onUserEvent(event = it)
+        }
     )
 }
 
 private fun handleNavigationRequestChange(
-    request: HomeNavigationRequest,
+    request: PokemonListNavigationRequest,
     navController: NavHostController
 ) {
     when (request) {
-        is HomeNavigationRequest.PokemonDetailScreen -> navController.navigate(Screen.Detail.route)
+        is PokemonListNavigationRequest.PokemonDetailScreen -> navController.navigate(
+            Screen.Detail.route.replace("{pokemonId}", request.pokemonId)
+        )
     }
 }

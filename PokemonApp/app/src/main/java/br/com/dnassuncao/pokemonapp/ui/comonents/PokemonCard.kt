@@ -44,13 +44,6 @@ fun PokemonCard(
                     .data(picture)
                     .crossfade(true)
                     .build(),
-//                placeholder = painterResource(
-//                    if (isSystemInDarkTheme()) {
-//                        R.drawable.ic_question_white
-//                    } else {
-//                        R.drawable.ic_question_black
-//                    }
-//                ),
                 error = painterResource(R.drawable.ic_error),
                 contentDescription = null,
                 modifier = Modifier

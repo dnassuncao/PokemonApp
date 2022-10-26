@@ -2,19 +2,27 @@ package br.com.dnassuncao.pokemonapp.ui.comonents
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import br.com.dnassuncao.pokemonapp.R
+import com.airbnb.lottie.compose.*
 
 @Composable
-fun Loading(modifier: Modifier = Modifier) {
+fun PokeLoading(modifier: Modifier = Modifier) {
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(R.raw.pokeball_loading)
+    )
     Box(
         modifier = modifier
     ) {
-        CircularProgressIndicator(
-            modifier = Modifier.align(Alignment.Center)
+        LottieAnimation(
+            composition = composition,
+            iterations = LottieConstants.IterateForever,
+            modifier = Modifier.size(width = 100.dp, height = 100.dp)
         )
     }
 }
@@ -22,5 +30,5 @@ fun Loading(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun LoadingPreview() {
-    Loading(modifier = Modifier.fillMaxSize())
+    PokeLoading(modifier = Modifier.fillMaxSize())
 }
