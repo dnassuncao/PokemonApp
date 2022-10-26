@@ -1,4 +1,4 @@
-package br.com.dnassuncao.domain.model
+package br.com.dnassuncao.pokemonapp.domain.model
 
 data class Pokemon(
     val id: Long = 0,

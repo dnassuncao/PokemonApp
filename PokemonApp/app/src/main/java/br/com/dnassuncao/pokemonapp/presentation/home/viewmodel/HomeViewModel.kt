@@ -2,7 +2,9 @@ package br.com.dnassuncao.pokemonapp.presentation.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.dnassuncao.domain.usecase.FetchPokemonUseCase
+import br.com.dnassuncao.pokemonapp.core.extensions.onError
+import br.com.dnassuncao.pokemonapp.core.extensions.onSuccess
+import br.com.dnassuncao.pokemonapp.domain.usecase.FetchPokemonUseCase
 import br.com.dnassuncao.pokemonapp.ui.common.UiStatus
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,20 +39,17 @@ class HomeViewModel(
                 status = UiStatus.Loading
             )
 
-            runCatching {
-                fetchPokemonUseCase.invoke()
-            }.onSuccess { data ->
-                data.onSuccess {
+            fetchPokemonUseCase()
+                .onError {
+                    _uiState.value = uiState.value.copy(
+                        status = UiStatus.Loading
+                    )
+                }.onSuccess {
                     _uiState.value = uiState.value.copy(
                         status = UiStatus.Success,
                         pokemonList = it
                     )
                 }
-            }.onFailure {
-                _uiState.value = uiState.value.copy(
-                    status = UiStatus.Loading
-                )
-            }
         }
     }
 }

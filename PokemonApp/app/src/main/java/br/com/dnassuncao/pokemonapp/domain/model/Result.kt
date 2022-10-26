@@ -1,4 +1,4 @@
-package br.com.dnassuncao.domain.model
+package br.com.dnassuncao.pokemonapp.domain.model
 
 sealed class Result<T> {
 

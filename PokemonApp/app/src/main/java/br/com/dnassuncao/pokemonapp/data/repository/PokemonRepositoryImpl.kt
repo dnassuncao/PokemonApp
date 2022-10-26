@@ -1,14 +1,16 @@
-package br.com.dnassuncao.data.repository
+package br.com.dnassuncao.pokemonapp.data.repository
 
-import br.com.dnassuncao.data.remote.PokemonApi
-import br.com.dnassuncao.domain.model.Pokemon
+import br.com.dnassuncao.pokemonapp.data.remote.PokemonApi
+import br.com.dnassuncao.pokemonapp.domain.model.Pokemon
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class PokemonRepositoryImpl(
     private val pokemonApi: PokemonApi
 ) : PokemonRepository {
-    override suspend fun fetchPokemons(): Result<List<Pokemon>> {
-        return Result.success(
-            value = listOf(
+    override suspend fun fetchPokemons(): Flow<List<Pokemon>> = flow {
+        emit(
+            listOf(
                 Pokemon(
                     id = 1,
                     name = "Bulbasaur",

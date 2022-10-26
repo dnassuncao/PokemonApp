@@ -1,6 +1,6 @@
-package br.com.dnassuncao.network.di
+package br.com.dnassuncao.pokemonapp.network.di
 
-import br.com.dnassuncao.data.remote.PokemonApi
+import br.com.dnassuncao.pokemonapp.data.remote.PokemonApi
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit

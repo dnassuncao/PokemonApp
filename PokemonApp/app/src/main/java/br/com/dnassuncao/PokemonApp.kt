@@ -2,7 +2,7 @@ package br.com.dnassuncao
 
 import android.app.Application
 import br.com.dnassuncao.pokemonapp.BuildConfig
-import br.com.dnassuncao.di.AppModules
+import br.com.dnassuncao.pokemonapp.di.AppModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

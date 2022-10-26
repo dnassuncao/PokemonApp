@@ -8,7 +8,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import br.com.dnassuncao.domain.model.Pokemon
+import br.com.dnassuncao.pokemonapp.domain.model.Pokemon
 import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeUiState
 import br.com.dnassuncao.pokemonapp.presentation.home.viewmodel.HomeUserEvent
 import br.com.dnassuncao.pokemonapp.ui.common.UiStatus

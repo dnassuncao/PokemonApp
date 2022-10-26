@@ -1,4 +1,4 @@
-package br.com.dnassuncao.data.entity
+package br.com.dnassuncao.pokemonapp.data.entity
 
 import com.google.gson.annotations.SerializedName
 
