@@ -9,15 +9,11 @@ import kotlinx.coroutines.flow.flow
 class PokemonRepositoryImpl(
     private val pokemonApi: PokemonApi
 ) : PokemonRepository {
-    override suspend fun fetchPokemonList(): Flow<List<Pokemon>> = flow {
-        val pokemonList = pokemonApi.fetchPokemons(
-            limit = 50,
-            offset = 1
+
+    override suspend fun fetchPokemonList(limit: Int?, offset: Int) = pokemonApi.fetchPokemons(
+            limit = limit,
+            offset = offset
         )
-        emit(
-            pokemonList.results.map { pokemonResult -> pokemonResult.toDomain() }
-        )
-    }
 
     override suspend fun fetchPokemonDetail(pokemonId: String): Flow<Pokemon> = flow {
         emit(

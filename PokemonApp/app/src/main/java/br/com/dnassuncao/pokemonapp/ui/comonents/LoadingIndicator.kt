@@ -12,7 +12,10 @@ import br.com.dnassuncao.pokemonapp.R
 import com.airbnb.lottie.compose.*
 
 @Composable
-fun PokeLoading(modifier: Modifier = Modifier) {
+fun PokeLoading(
+    modifier: Modifier = Modifier
+) {
+
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.pokeball_loading)
     )
@@ -22,7 +25,7 @@ fun PokeLoading(modifier: Modifier = Modifier) {
         LottieAnimation(
             composition = composition,
             iterations = LottieConstants.IterateForever,
-            modifier = Modifier.size(width = 100.dp, height = 100.dp)
+            modifier = modifier
         )
     }
 }
