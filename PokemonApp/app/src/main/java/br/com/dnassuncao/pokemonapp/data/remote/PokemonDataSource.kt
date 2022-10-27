@@ -20,14 +20,18 @@ class PokemonDataSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pokemon> {
         return try {
             val nextPageNumber = params.key ?: 1
-            val response = repo.fetchPokemonList(10, nextPageNumber)
+            val response = repo.fetchPokemonList(PAGE_SIZE, nextPageNumber)
             LoadResult.Page(
                 data =  response.results.map { pokemonResult -> pokemonResult.toDomain() },
                 prevKey = null,
-                nextKey = nextPageNumber + 10
+                nextKey = nextPageNumber + PAGE_SIZE
             )
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
+    }
+
+    companion object {
+        const val PAGE_SIZE = 10
     }
 }

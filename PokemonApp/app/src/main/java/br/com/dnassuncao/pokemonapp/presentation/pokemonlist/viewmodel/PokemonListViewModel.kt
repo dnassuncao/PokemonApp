@@ -6,6 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import br.com.dnassuncao.pokemonapp.data.remote.PokemonDataSource
+import br.com.dnassuncao.pokemonapp.data.remote.PokemonDataSource.Companion.PAGE_SIZE
 import br.com.dnassuncao.pokemonapp.data.repository.PokemonRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +25,7 @@ class PokemonListViewModel(
     val uiState = _uiState.asStateFlow()
 
     val pokemonPager = Pager(
-        PagingConfig(pageSize = 10)
+        PagingConfig(pageSize = PAGE_SIZE)
     ) {
         PokemonDataSource(pokemonRepository)
     }.flow.cachedIn(viewModelScope)

@@ -60,8 +60,7 @@ fun PokemonListScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             PokeLoading(
-                                modifier = Modifier
-                                    .wrapContentSize()
+                                modifier = Modifier.wrapContentSize()
                             )
                         }
                     }
@@ -82,11 +81,10 @@ fun PokemonListScreen(
                     item {
                         Box(
                             modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             PokeLoading(
                                 modifier = Modifier.wrapContentSize()
-                                    .size(width = 100.dp, height = 100.dp)
                             )
                         }
                     }
